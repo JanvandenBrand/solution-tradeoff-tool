@@ -1,0 +1,61 @@
+## Decision context
+
+- **Decision ID**: {{ decision.id }}
+- **Decision name**: {{ decision.name }}
+- **Problem statement**: {{ decision.problem_statement }}
+- **Planning horizon**: {{ decision.planning_horizon }}
+{% if decision.plateau is defined and decision.plateau %}- **Plateau filter**: {{ decision.plateau }}
+{% endif %}
+
+## Candidate solutions under evaluation
+
+{% for c in candidates %}
+- Option {{ c.id }}: {{ c.name }}
+{% endfor %}
+
+{% if principles %}
+## Architecture Principles ({{ principles | length }})
+
+| Ref | Description | Domain |
+|-----|-------------|--------|
+{% for p in principles %}| {{ p.principle_id }} | {{ p.description }} | {{ p.domain }} |
+{% endfor %}
+{% endif %}
+
+{% if ad_refs %}
+## Architecture Decisions ({{ ad_refs | length }})
+
+{% for ad in ad_refs %}
+- {{ ad }}
+{% endfor %}
+{% endif %}
+
+## Applicable requirements — Must ({{ must_requirements | length }})
+
+| Req ID | Requirement | Domain | APR Ref | AD Ref |
+|--------|-------------|--------|---------|--------|
+{% for r in must_requirements %}| {{ r.req_id }} | {{ r.description }} | {{ r.domain }} | {{ r.apr_ref or "—" }} | {{ r.ad_ref or "—" }} |
+{% endfor %}
+
+{% if should_requirements %}
+## Applicable requirements — Should ({{ should_requirements | length }})
+
+| Req ID | Requirement | Domain | APR Ref | AD Ref |
+|--------|-------------|--------|---------|--------|
+{% for r in should_requirements %}| {{ r.req_id }} | {{ r.description }} | {{ r.domain }} | {{ r.apr_ref or "—" }} | {{ r.ad_ref or "—" }} |
+{% endfor %}
+{% endif %}
+
+## Point budget
+
+You have **{{ point_budget }} priority points** to distribute across the {{ criteria_count }} criteria above.
+
+Rules:
+- You may **not** assign all points to a single criterion.
+- You may **not** distribute them equally across all criteria.
+- Force a real prioritisation that reflects your perspective's concerns.
+{% if background_knowledge %}
+## Background Knowledge
+
+{{ background_knowledge }}
+{% endif %}

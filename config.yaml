@@ -1,0 +1,34 @@
+xlsx:
+  requirements_sheet: "Requirements"
+  principles_sheet: "Principles"
+
+  columns:
+    req_id: "Ref"
+    description: "Requirement"
+    domain: "Category"
+    moscow: "MoSCoW"
+    plateau: "Plateau"
+    status: "Status"
+    apr_ref: "APR Link"
+    ad_ref: "AD Ref"
+
+  principles_columns:
+    principle_id: "Ref"
+    description: "Architecture Principle"
+    domain: "Category"
+
+budget:
+  multiplier: 2.5
+  round_to: 5
+  minimum: 15
+
+elimination:
+  must_score_threshold: 6
+
+output:
+  agent_filename_pattern: "{index:02d}_{perspective}.md"
+  context_filename: "00_context.md"
+  synthesis_filename: "{N}_synthesis.md"
+  review_filename: "review.md"
+  manifest_filename: "manifest.json"
+  compile_filename: "compile-prompt.md"

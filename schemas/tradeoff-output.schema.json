@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tradeoff-output",
+  "title": "Solution Trade-Off Perspective Agent Output",
+  "description": "YAML output produced by a perspective agent in the solution trade-off process.",
+  "type": "object",
+  "required": ["perspective_id", "concerns", "point_allocations", "preferred_option"],
+  "additionalProperties": false,
+  "properties": {
+    "perspective_id": {
+      "type": "string",
+      "description": "ID matching the perspectives/ YAML filename stem.",
+      "minLength": 1
+    },
+    "concerns": {
+      "type": "array",
+      "description": "Top concerns from this perspective (up to 5).",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["concern", "risk"],
+        "additionalProperties": false,
+        "properties": {
+          "concern": {
+            "type": "string",
+            "minLength": 1
+          },
+          "risk": {
+            "type": "string",
+            "minLength": 1
+          },
+          "best_candidate": {
+            "type": ["string", "null"],
+            "description": "Candidate ID or name that best addresses this concern, or null."
+          }
+        }
+      }
+    },
+    "point_allocations": {
+      "type": "array",
+      "description": "Priority point distribution across requirements.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["criterion_id", "points", "rationale"],
+        "additionalProperties": false,
+        "properties": {
+          "criterion_id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Req ID from the context block (e.g. REQ001)."
+          },
+          "points": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "must_challenges": {
+      "type": "array",
+      "description": "Must requirements challenged or proposed by this perspective.",
+      "items": {
+        "type": "object",
+        "required": ["req_id", "action", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "req_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "action": {
+            "type": "string",
+            "enum": ["challenge", "add"]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "preferred_option": {
+      "type": "string",
+      "description": "Candidate ID or name preferred by this perspective.",
+      "minLength": 1
+    },
+    "preferred_rationale": {
+      "type": "string",
+      "description": "One-paragraph rationale for the preferred option."
+    }
+  }
+}

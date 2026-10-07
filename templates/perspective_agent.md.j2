@@ -1,0 +1,53 @@
+## Your role
+{{ perspective.role }}
+
+## Your primary concern
+{{ perspective.primary_concern }}
+
+## Your failure mode
+{{ perspective.failure_mode }}
+
+## Your evaluation lens
+{% for item in perspective.evaluation_lens %}
+{{ loop.index }}. {{ item }}
+{% endfor %}
+
+## Your task
+
+1. List your top 5 concerns about this decision from a {{ perspective.label }} perspective.
+   For each concern state: the concern, the risk if ignored, and which candidate solution
+   best addresses it (if any).
+2. Distribute your {{ point_budget }} priority points across the criteria list.
+   For each allocation give a one-sentence rationale.
+3. Identify any Must requirements you would challenge or add from your perspective.
+4. State your preferred option at this stage with a one-paragraph rationale.
+   Be explicit about what you are willing to sacrifice.
+
+## Output format
+
+Provide your response as YAML using exactly this structure.
+Do not add any prose outside the YAML block.
+
+```yaml
+perspective_id: {{ perspective.id }}
+concerns:
+  - concern: "<concern text>"
+    risk: "<risk if ignored>"
+    best_candidate: "<candidate id or null>"
+point_allocations:
+  - criterion_id: "<REQ ID>"
+    points: <integer>
+    rationale: "<one sentence>"
+must_challenges:
+  # To challenge an existing Must requirement:
+  # - req_id: "<existing REQ ID, e.g. REQ001>"
+  #   action: challenge
+  #   description: "<one sentence explaining why it should be downgraded or removed>"
+  # To propose a new Must requirement not in the list:
+  # - req_id: "NEW-001"   # assign sequential IDs: NEW-001, NEW-002, … — never null
+  #   action: add
+  #   description: "<one sentence describing the new requirement>"
+  # If no challenges or additions: []
+preferred_option: "<candidate id>"
+preferred_rationale: "<one paragraph>"
+```

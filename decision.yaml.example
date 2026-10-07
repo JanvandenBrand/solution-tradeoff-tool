@@ -1,0 +1,48 @@
+# Example decision — copy to decision.yaml and edit for your own analysis.
+# Works out of the box with examples/requirements_sample.xlsx.
+
+decision:
+  id: AD-001
+  name: "Research Data Storage Selection"
+  problem_statement: "Which storage service should the platform use for researcher project data in Plateau 1?"
+  planning_horizon: short
+  plateau: 1
+
+candidates:
+  - id: A
+    name: "Managed cloud object storage"
+  - id: B
+    name: "Self-hosted S3-compatible object store"
+  - id: C
+    name: "Institutional network file share"
+
+perspectives:
+  - architecture
+  - data_protection
+  - data_scientist
+  - devops
+  - financial
+  - infrastructure
+  - security
+
+requirements_filter:
+  domains:
+    - Technology
+    - Security and Identity
+    - Data Management
+  moscow:
+    - Must
+    - Should
+
+# Optional: list governing Architecture Decisions for this analysis.
+# Each entry is a free-text string — include the AD ID and a short title.
+# These appear in 00_context.md under "Architecture Decisions".
+architecture_decisions:
+  - "AD-000: Cloud-first hosting — Closed"
+
+# Optional: path to a Markdown file with narrative background knowledge for this
+# decision (vendor calls, risk register notes, unresolved items). Resolved relative
+# to this file's directory. Appended to 00_context.md as "## Background Knowledge",
+# after everything else and before each perspective's own prompt.
+# Start from the template: cp templates/background_knowledge.md background_knowledge.md
+# background_knowledge_path: "background_knowledge.md"

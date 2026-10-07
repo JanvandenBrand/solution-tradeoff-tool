@@ -1,0 +1,21 @@
+decision:
+  id: AD-TEST-UV
+  name: "Unverified Decision"
+  problem_statement: "Decision where one perspective is not yet verified."
+  planning_horizon: short
+  plateau: 1
+
+candidates:
+  - id: A
+    name: "Option A"
+  - id: B
+    name: "Option B"
+
+perspectives:
+  - clinical
+  - security
+
+requirements_filter:
+  domains: []
+  moscow:
+    - Must

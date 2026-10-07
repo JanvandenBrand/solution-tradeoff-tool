@@ -1,0 +1,22 @@
+decision:
+  id: AD-TEST
+  name: "Test Decision"
+  problem_statement: "Which framework should we adopt for the test scenario?"
+  planning_horizon: medium
+  plateau: 1
+
+candidates:
+  - id: A
+    name: "Option A"
+  - id: B
+    name: "Option B"
+
+perspectives:
+  - clinical
+  - security
+
+requirements_filter:
+  domains: []
+  moscow:
+    - Must
+    - Should

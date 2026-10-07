@@ -1,0 +1,41 @@
+perspective_id: clinical
+concerns:
+  - concern: "FL training adds documentation burden on ICU nurses"
+    risk: "Staff resistance leading to low adoption and biased training data"
+    best_candidate: "A"
+  - concern: "Alert fatigue from model predictions integrated into clinical workflow"
+    risk: "Nurses ignore predictions, negating the clinical value"
+    best_candidate: null
+  - concern: "Consent management complexity for federated data sharing"
+    risk: "GDPR non-compliance or inability to onboard data providers"
+    best_candidate: "B"
+  - concern: "Lack of interpretability of FL model outputs at bedside"
+    risk: "Clinicians cannot act on or challenge model results"
+    best_candidate: null
+  - concern: "Training rounds disrupt network bandwidth on ward"
+    risk: "Critical clinical systems experience latency during FL rounds"
+    best_candidate: "C"
+point_allocations:
+  - criterion_id: REQ001
+    points: 20
+    rationale: "Encryption at rest is non-negotiable in ICU data environments."
+  - criterion_id: REQ003
+    points: 35
+    rationale: "Raw patient data must never leave the site — absolute clinical requirement."
+  - criterion_id: REQ007
+    points: 10
+    rationale: "Concurrent jobs matter less from a clinical perspective."
+  - criterion_id: REQ012
+    points: 15
+    rationale: "GDPR compliance is essential given patient data sensitivity."
+must_challenges:
+  - req_id: REQ210
+    action: challenge
+    description: "Key Vault integration is important but should be Should not Must at Plateau 2."
+preferred_option: "A"
+preferred_rationale: >
+  Option A offers the most mature privacy controls and the smallest
+  operational footprint for ward staff. While Option B scores higher on raw
+  performance, its complexity would create unacceptable documentation burden
+  for clinical users. I am willing to sacrifice raw throughput for simplicity
+  of integration with existing clinical workflows.
